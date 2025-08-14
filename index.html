@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kohinoor Events — Hospitality Staffing in UAE</title>
+  <meta name="description" content="Kohinoor Events provides reliable hospitality staffing across the UAE — stewarding, cooks, cleaners, pool attendants, housekeeping, F&B service and more."/>
+  <meta name="theme-color" content="#0b1220" />
+  
+  <style>
+    :root{
+      --bg:#0b1220;           /* deep navy */
+      --bg-2:#0f1a2c;         /* darker panel */
+      --text:#e7f4ff;         /* soft white */
+      --muted:#a9bfd3;        /* slate */
+      --brand:#0ea5e9;        /* cyan */
+      --accent:#facc15;       /* gold */
+      --panel:rgba(255,255,255,.06);
+      --glass: blur(10px) saturate(120%);
+      --radius:18px;
+      --shadow:0 12px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05);
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; color:var(--text); background:
+      radial-gradient(1200px 600px at 0% 0%, #0a1a2b 0%, transparent 60%),
+      radial-gradient(1000px 600px at 100% 10%, #0a2032 0%, transparent 60%),
+      linear-gradient(180deg, #0b1220, #0b1220);
+      font: 500 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      overflow-x:hidden; scroll-behavior:smooth;
+    }
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .container{width:min(92%, var(--maxw)); margin-inline:auto}
+    .glass{backdrop-filter:var(--glass); -webkit-backdrop-filter:var(--glass); background:var(--panel); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .btn{display:inline-flex; gap:.6rem; align-items:center; justify-content:center; padding:.85rem 1.05rem; border-radius:14px; border:1px solid rgba(255,255,255,.16); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color:var(--text); cursor:pointer; transition:.2s; min-height:44px}
+    .btn:hover{transform:translateY(-2px); background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02))}
+    .btn.primary{border-color: rgba(14,165,233,.45); background:linear-gradient(180deg, rgba(14,165,233,.22), rgba(14,165,233,.06))}
+    .btn.accent{border-color: rgba(250,204,21,.45); background:linear-gradient(180deg, rgba(250,204,21,.22), rgba(250,204,21,.06))}
+    .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+    .chip{padding:.45rem .7rem; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); font-size:.85rem; color:var(--muted)}
+    .grid{display:grid; gap:1.1rem}
+    .hidden{display:none !important}
+    body.no-scroll{overflow:hidden}
+
+    h1{font-size:clamp(2.2rem, 4vw + 1rem, 3.6rem); line-height:1.1; margin:0 0 .6rem}
+    h2{font-size:clamp(1.6rem, 1.8vw + 1rem, 2.4rem); margin:0 0 .6rem}
+    h3{font-size:clamp(1.1rem, .8vw + 1rem, 1.35rem); margin:.2rem 0}
+    section{padding:80px 0; scroll-margin-top:92px}
+
+    /* Nav */
+    .nav{position:sticky; top:0; z-index:50; padding-top:0}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.6rem .8rem; margin-top:0}
+    .nav.scrolled .nav-inner{background:rgba(10,20,35,.7); border:1px solid rgba(255,255,255,.12); border-radius:14px; backdrop-filter: blur(10px) saturate(120%); -webkit-backdrop-filter: blur(10px) saturate(120%);} 
+    .logo{display:flex; align-items:center; gap:.65rem; font-weight:800; letter-spacing:.3px}
+    .logo svg{filter:drop-shadow(0 6px 10px rgba(14,165,233,.3))}
+    .nav-links{display:flex; gap:.4rem; align-items:center}
+    .nav-links a{padding:.55rem .8rem; border-radius:10px; opacity:.9}
+    .nav-links a:hover{background:rgba(255,255,255,.08); opacity:1}
+    .menu-btn{display:none}
+    @media (max-width: 900px){
+      .menu-btn{display:inline-flex}
+      .nav-links{position:fixed; inset:64px 0 auto 0; padding:1rem; background:rgba(7,12,22,.96); border-top:1px solid rgba(255,255,255,.12); transform:translateY(-12px); transition:all .25s ease; flex-direction:column; opacity:0; visibility:hidden; pointer-events:none}
+      .nav-links.open{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
+    }
+
+    /* Hero */
+    .hero{padding:90px 0 110px}
+    .hero-wrap{display:grid; grid-template-columns:1fr; gap:1.6rem; align-items:center}
+    .hero p{color:var(--muted); margin:0 0 1rem}
+
+    /* Services */
+    .filters{display:flex; gap:.5rem; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:.3rem; scroll-snap-type:x mandatory}
+    .filters .pill{white-space:nowrap; scroll-snap-align:start}
+    .pill{padding:.55rem .85rem; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)); cursor:pointer}
+    .pill[aria-pressed="true"]{border-color:rgba(14,165,233,.5); box-shadow:0 0 0 2px rgba(14,165,233,.25) inset}
+    .search{min-width:220px; flex:1; display:flex}
+    .search input{width:100%; padding:.75rem .9rem; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text)}
+    .service-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem}
+    @media (max-width: 1000px){ .service-grid{grid-template-columns:repeat(2, 1fr)} }
+    @media (max-width: 600px){ .service-grid{grid-template-columns:1fr} }
+    .card{display:flex; flex-direction:column; overflow:hidden}
+    .card header{display:flex; align-items:center; gap:.7rem; padding:1rem}
+    .card header svg{flex:0 0 42px}
+    .card p{color:var(--muted); padding:0 1rem .8rem; margin:0}
+    .card footer{display:flex; align-items:center; justify-content:space-between; padding:.8rem 1rem; border-top:1px solid rgba(255,255,255,.12)}
+
+    /* Carousel */
+    .carousel{position:relative; overflow:hidden; touch-action: pan-y; user-select:none}
+    .track{display:flex; gap:1rem; transition:transform .45s ease; will-change: transform}
+    .review{min-width:calc(33.333% - .66rem); padding:1rem}
+    @media (max-width: 900px){ .review{min-width:calc(50% - .5rem)} }
+    @media (max-width: 600px){ .review{min-width:100%} }
+
+    /* Gallery */
+    .masonry{ columns: 4 280px; column-gap: 1rem }
+    .masonry > figure{ break-inside: avoid; margin:0 0 1rem; overflow:hidden; border-radius: 14px; position:relative }
+    .masonry figcaption{ position:absolute; inset:auto 8px 8px 8px; background: rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.16); border-radius:10px; padding:.3rem .6rem; font-size:.85rem }
+    .masonry img{ width:100%; height:auto; display:block }
+    @media (max-width: 520px){ .masonry{ columns: 1 260px } }
+
+    /* Footer */
+    footer.site{margin-top:60px; padding:40px 0; border-top:1px solid rgba(255,255,255,.12)}
+
+    /* Lightbox / Modal */
+    .modal{position:fixed; inset:0; display:grid; place-items:center; background:rgba(0,0,0,.7); z-index:80; padding:1rem}
+    .modal > .panel{width:min(720px, 92%)}
+    .field{display:grid; gap:.35rem}
+    .field label{font-size:.9rem; color:var(--muted)}
+    .field input, .field select, .field textarea{padding:.75rem .9rem; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text)}
+
+    /* Mobile tweaks */
+    @media (max-width: 900px){
+      .container{ width:min(94%, var(--maxw)) }
+      .nav-inner{ padding:.9rem }
+      .nav-links a{ padding:1rem; font-size:1.05rem }
+      #contact .grid{ grid-template-columns:1fr !important }
+    }
+    @media (max-width: 700px){
+      .search{ min-width:180px }
+    }
+    @media (max-width: 600px){
+      section{ padding:60px 0 }
+      h1{ font-size: clamp(1.9rem, 6vw + .8rem, 2.6rem) }
+      .card header{ align-items:flex-start }
+      .card header svg{ flex:0 0 36px }
+      .search{ min-width:0; flex-basis:100% }
+    }
+    @media (max-width: 800px){
+      #quick-form, #req-form{ grid-template-columns:1fr !important }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="#home" aria-label="Kohinoor Events home">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.6 4.7 5.4.8-3.9 3.9.9 5.3L12 15.8 7 17.7l.9-5.3L4 8.5l5.4-.8L12 3Z" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+        <span>Kohinoor Events</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div style="display:flex; gap:.5rem; align-items:center">
+        <button class="btn accent" id="open-req">Request Staff</button>
+        <button class="btn menu-btn" id="menu-btn" aria-label="Toggle menu">Menu</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="container hero-wrap">
+      <div>
+        <span class="chip">UAE • On‑demand hospitality crews</span>
+        <h1>Staffing for Hotels, Resorts & Events — on time, every time.</h1>
+        <p>Stewarding teams, cooks & commis, cleaners & housekeeping, pool & beach attendants, F&B service, baristas, banquet support and more. Scaled to your shift patterns and SLAs.</p>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.4rem">
+          <button class="btn primary" id="hero-req">Get a staffing quote</button>
+          <a class="btn" href="#services">Explore services</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div style="display:flex; align-items:end; justify-content:space-between; gap:1rem; margin-bottom:1rem">
+        <div>
+          <h2>Services we provide</h2>
+          <p class="muted" style="color:var(--muted); margin:.2rem 0 0">Fully briefed crews with site induction, PPE and supervisor oversight.</p>
+        </div>
+        <div class="filters">
+          <button class="pill" data-cat="all" aria-pressed="true">All</button>
+          <button class="pill" data-cat="kitchen">Kitchen</button>
+          <button class="pill" data-cat="fnb">F&B</button>
+          <button class="pill" data-cat="housekeeping">Housekeeping</button>
+          <button class="pill" data-cat="outdoor">Pool & Outdoor</button>
+          <div class="search"><input id="search" type="search" placeholder="Search role… (e.g., barista)"/></div>
+        </div>
+      </div>
+
+      <div class="service-grid" id="service-grid"></div>
+    </div>
+  </section>
+
+  <!-- CLIENTS / SOCIAL PROOF -->
+  <section id="clients">
+    <div class="container">
+      <div style="display:flex; align-items:end; justify-content:space-between; gap:1rem; margin-bottom:1rem">
+        <div>
+          <h2>Trusted by hospitality teams</h2>
+          <p class="muted" style="color:var(--muted); margin:.2rem 0 0">From five‑star hotels to banquet venues and beach clubs.</p>
+        </div>
+      </div>
+      <div class="glass" style="padding:1rem">
+        <div class="carousel">
+          <div class="track" id="track"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="container">
+      <div style="display:flex; align-items:end; justify-content:space-between; gap:1rem; margin-bottom:1rem">
+        <div>
+          <h2>Gallery</h2>
+          <p class="muted" style="color:var(--muted); margin:.2rem 0 0">A look at our crews and setups.</p>
+        </div>
+      </div>
+      <div class="masonry" id="masonry"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div style="display:flex; align-items:end; justify-content:space-between; gap:1rem; margin-bottom:1rem">
+        <div>
+          <h2>Contact us</h2>
+          <p class="muted" style="color:var(--muted); margin:.2rem 0 0">Tell us your shift timings and roles needed — we’ll confirm availability fast.</p>
+        </div>
+        <button class="btn primary" id="open-req-2">Request Staff</button>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr">
+        <div class="glass" style="padding:1rem">
+          <h3>Kohinoor Events</h3>
+          <p style="color:var(--muted); margin:.2rem 0 .8rem">United Arab Emirates</p>
+          <p>
+            <a class="btn" href="tel:+971552102796">📞 +971 55 210 2796</a>
+            <a class="btn" href="mailto:info@kohinoorevents.ae">✉️ info@kohinoorevents.ae</a>
+            <a class="btn" href="https://wa.me/971552102796" target="_blank" rel="noopener">WhatsApp</a>
+          </p>
+          <p style="color:var(--muted)">Mon–Sun • 08:00–22:00 GST</p>
+          <div style="margin-top:.6rem; display:flex; gap:.5rem; flex-wrap:wrap">
+            <span class="chip">Short‑notice cover</span>
+            <span class="chip">Supervisor on shift</span>
+            <span class="chip">Time & attendance</span>
+            <span class="chip">Uniform & PPE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap">
+      <div style="color:var(--muted)">© <span id="year"></span> Kohinoor Events. All rights reserved.</div>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center">
+        <a class="chip" href="#services">Hospitality Staffing</a>
+        <span class="chip">UAE‑wide staffing</span>
+        <button class="btn" id="to-top" aria-label="Back to top">↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Request Staff Modal (kept for future use; buttons currently open WhatsApp) -->
+  <template id="req-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Request Staff">
+      <div class="panel glass" style="padding:1rem">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:.4rem">
+          <h3 style="margin:0">Request Staff</h3>
+          <button class="btn" data-close>Close</button>
+        </div>
+        <form id="req-form" class="grid" style="grid-template-columns:1fr 1fr">
+          <div class="field"><label for="r-company">Company / Venue</label><input id="r-company" required/></div>
+          <div class="field"><label for="r-name">Your Name</label><input id="r-name" required/></div>
+          <div class="field"><label for="r-phone">Phone</label><input id="r-phone" required placeholder="e.g., +971…"/></div>
+          <div class="field"><label for="r-email">Email</label><input id="r-email" type="email"/></div>
+          <div class="field"><label for="r-location">Location</label>
+            <select id="r-location">
+              <option>Dubai</option><option>Abu Dhabi</option><option>Sharjah</option><option>Ajman</option><option>Ras Al Khaimah</option><option>Fujairah</option><option>Umm Al Quwain</option>
+            </select>
+          </div>
+          <div class="field"><label for="r-role">Role</label>
+            <select id="r-role">
+              <option>Steward</option><option>Cook / Commis</option><option>Cleaner</option><option>Housekeeping</option><option>Pool Attendant</option><option>Barista</option><option>F&B Service</option><option>Lifeguard</option>
+            </select>
+          </div>
+          <div class="field"><label for="r-count">Headcount</label><input id="r-count" type="number" min="1" value="5"/></div>
+          <div class="field"><label for="r-dates">Dates</label><input id="r-dates" placeholder="e.g., 21–24 Sep, 9am–6pm"/></div>
+          <div class="field" style="grid-column:1/-1"><label for="r-notes">Notes</label><textarea id="r-notes" rows="3" placeholder="Duties, uniform, reporting point, etc."></textarea></div>
+          <div style="grid-column:1/-1; display:flex; gap:.6rem; flex-wrap:wrap">
+            <button class="btn primary" type="submit">Create email</button>
+            <button class="btn" type="button" data-close>Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    // Helpers
+    const $ = (s,el=document)=>el.querySelector(s);
+    const $$ = (s,el=document)=>Array.from(el.querySelectorAll(s));
+
+    // WhatsApp deep link builder for Request Staff
+    function waLink({role='', location='', headcount='', dates='', notes=''} = {}){
+      const text = `Hi Kohinoor Events! I'd like to request staff.\nRole(s): ${role||'—'}\nLocation: ${location||'—'}\nHeadcount: ${headcount||'—'}\nDates: ${dates||'—'}\nNotes: ${notes||'—'}`;
+      return 'https://wa.me/971552102796?text=' + encodeURIComponent(text);
+    }
+
+    // Data: services + testimonials
+    const SERVICES = [
+      { id:'steward',     title:'Stewarding',          cat:'kitchen',      icon:`M4 4h16v4H4V4zm0 6h16v4H4v-4zm0 6h10v4H4v-4z`,
+        blurb:'Dishwashing, pot wash, plate-up lines, BOH hygiene and waste segregation with supervisor oversight.' },
+      { id:'cook',        title:'Cook / Commis',       cat:'kitchen',      icon:`M5 5h14v4H5zM4 11h16v2H4zM7 15h10v4H7z`,
+        blurb:'Hot & cold kitchen prep, banquet support, salad & canapés, HACCP‑aware staff.' },
+      { id:'cleaner',     title:'Cleaner',             cat:'housekeeping', icon:`M5 5h4l10 10-4 4L5 9zM3 21h6`,
+        blurb:'Public area & back‑of‑house cleaning, floor care, washrooms, waste handling.' },
+      { id:'housekeeping',title:'Housekeeping',        cat:'housekeeping', icon:`M4 10h16v10H4zM8 4h8v6H8z`,
+        blurb:'Room attendants, linen runners, turndown service with checklists and QC.' },
+      { id:'pool',        title:'Pool / Beach Attendant', cat:'outdoor',   icon:`M4 18c4-4 12-4 16 0M4 14c4-4 12-4 16 0M4 10c4-4 12-4 16 0`,
+        blurb:'Pool towel desk, cabana set‑up, guest assistance and area upkeep.' },
+      { id:'fnb',         title:'F&B Service',         cat:'fnb',          icon:`M4 17h16M6 7h12l-1 8H7L6 7z`,
+        blurb:'Waiters, runners, banquet and lounge service with tray handling and POS basics.' },
+      { id:'barista',     title:'Barista',             cat:'fnb',          icon:`M5 8h14l-2 8H7L5 8zm3 8v2m8-2v2`,
+        blurb:'Espresso station, latte art basics, brew recipes and cleaning standards.' },
+      { id:'lifeguard',   title:'Lifeguard (cert.)',   cat:'outdoor',      icon:`M12 2v20M2 12h20M5 5l14 14M19 5 5 19`,
+        blurb:'Certified pool & beach lifeguards with incident reporting and first‑aid readiness.' },
+    ];
+
+    const TESTIMONIALS = [
+      {name:'F&B Manager, Dubai', text:'We booked 24 stewards for a last‑minute banquet. Team arrived early, fully briefed and smashed it.'},
+      {name:'Executive Housekeeper, Abu Dhabi', text:'Housekeeping cover was spotless—literally. Great supervisors and rota flexibility.'},
+      {name:'Beach Club Ops', text:'Pool attendants were guest‑focused and proactive. Rebooked for the season.'},
+    ];
+
+    // Gallery images (swap to your own files anytime)
+    const GALLERY = [
+      { alt:'Barista station', src:'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1200&auto=format&fit=crop' },
+      { alt:'Chef plating', src:'https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=1200&auto=format&fit=crop' },
+      { alt:'Housekeeping prep', src:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop' },
+      { alt:'Banquet setup', src:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1200&auto=format&fit=crop' },
+      { alt:'Poolside area', src:'https://images.unsplash.com/photo-1526672802808-5dc69e81d3d1?q=80&w=1200&auto=format&fit=crop' },
+      { alt:'Team briefing', src:'https://images.unsplash.com/photo-1525610553991-2bede1a236e2?q=80&w=1200&auto=format&fit=crop' },
+      { alt:'Event service', src:'https://images.unsplash.com/photo-1511018556340-d16986a1c194?q=80&w=1200&auto=format&fit=crop' },
+      { alt:'Clean & safe BOH', src:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1200&auto=format&fit=crop' }
+    ];
+
+    // Image loader with fallback
+    function wireImg(img, src){
+      try{ img.referrerPolicy='no-referrer'; img.setAttribute('referrerpolicy','no-referrer'); }catch(_){ }
+      img.loading='lazy'; img.decoding='async';
+      img.src = src;
+      img.onerror = () => {
+        const svg = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1200\" height=\"800\"><rect width=\"100%\" height=\"100%\" fill=\"#0f1a2c\"/><text x=\"50%\" y=\"50%\" fill=\"#a9bfd3\" font-family=\"system-ui\" font-size=\"28\" text-anchor=\"middle\" dy=\".35em\">Image unavailable</text></svg>`);
+        img.src = svg;
+      };
+    }
+
+    function renderGallery(){
+      const mason = document.getElementById('masonry'); if(!mason) return;
+      mason.innerHTML='';
+      GALLERY.forEach(g=>{
+        const fig=document.createElement('figure'); fig.className='glass';
+        const im=document.createElement('img'); wireImg(im, g.src); im.alt=g.alt;
+        const cap=document.createElement('figcaption'); cap.textContent=g.alt;
+        fig.appendChild(im); fig.appendChild(cap); mason.appendChild(fig);
+      });
+    }
+
+    // Scroll effects
+    const onScroll = ()=>{
+      const nav = document.getElementById('nav');
+      if(nav) nav.classList.toggle('scrolled', scrollY>10);
+    };
+    addEventListener('scroll', onScroll, {passive:true});
+
+    // Mobile menu
+    const menuBtn = $('#menu-btn');
+    if(menuBtn){
+      menuBtn.addEventListener('click', ()=>{
+        const nl=$('#nav-links'); if(!nl) return; nl.classList.toggle('open');
+        document.body.classList.toggle('no-scroll', nl.classList.contains('open'));
+      });
+    }
+    $$('#nav-links a').forEach(a=>a.addEventListener('click',()=>{
+      const nl = $('#nav-links'); if(!nl) return;
+      nl.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    }));
+    // Close menu on outside tap / Escape
+    document.addEventListener('click', (e)=>{
+      const nl=$('#nav-links'); if(!nl) return;
+      if(nl.classList.contains('open') && !e.target.closest('.nav')){
+        nl.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='Escape'){
+        const nl=$('#nav-links'); if(!nl) return;
+        nl.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+
+    // Reveal on scroll (safe if none)
+    const io=new IntersectionObserver((es)=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('revealed')),{threshold:.16});
+    $$('.reveal').forEach(el=>io.observe(el));
+
+    // Build service cards
+    const grid = $('#service-grid');
+    function iconPath(d){return `<svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="${d}"/></svg>`}
+    function renderServices(list){
+      if(!grid) return;
+      grid.innerHTML='';
+      list.forEach(s=>{
+        const card=document.createElement('article'); card.className='card glass reveal';
+        card.innerHTML=`<header>${iconPath(s.icon)}<div><h3>${s.title}</h3><div class="chip">${s.cat}</div></div></header>
+          <p>${s.blurb}</p>
+          <footer><span class="chip">On‑demand</span><button class="btn" data-hire="${s.id}">Hire</button></footer>`;
+        grid.appendChild(card);
+      });
+      $$('.reveal',grid).forEach(el=>io.observe(el));
+      $$('[data-hire]').forEach(btn=>btn.addEventListener('click',()=>{
+        const svc = SERVICES.find(x=>x.id===btn.dataset.hire);
+        const url = waLink({ role: svc ? svc.title : '' });
+        window.open(url, '_blank','noopener');
+      }));
+    }
+
+    // Filters
+    let cat='all'; let q='';
+    function applyFilters(){
+      const list = SERVICES.filter(s=> (cat==='all'||s.cat===cat) && (s.title.toLowerCase().includes(q)||s.blurb.toLowerCase().includes(q)) );
+      renderServices(list);
+    }
+    $$('#services .pill').forEach(b=>b.addEventListener('click',()=>{
+      $$('#services .pill').forEach(x=>x.setAttribute('aria-pressed','false'));
+      b.setAttribute('aria-pressed','true'); cat=b.dataset.cat; applyFilters();
+    }));
+    const searchEl = $('#search');
+    if(searchEl){ searchEl.addEventListener('input', e=>{ q = e.target.value.trim().toLowerCase(); applyFilters(); }); }
+
+    // Testimonials
+    const track = $('#track'); let slide=0;
+    function renderTestimonials(){
+      if(!track) return;
+      track.innerHTML='';
+      TESTIMONIALS.forEach(t=>{
+        const card=document.createElement('article'); card.className='review glass';
+        card.innerHTML=`<h3>${t.name}</h3><p style="color:var(--muted)">“${t.text}”</p>`;
+        track.appendChild(card);
+      });
+      go(0);
+    }
+    function go(i){ if(!track) return; const n=track.children.length; if(!n) return; slide=(i+n)%n; const w=track.children[0].getBoundingClientRect().width+16; track.style.transform=`translateX(${-slide*w}px)`; }
+    let autoTimer = null;
+    function startAuto(){ if(autoTimer) clearInterval(autoTimer); autoTimer = setInterval(()=>go(slide+1), 5000); }
+    addEventListener('resize', ()=>{ go(slide); }, {passive:true});
+
+    // Touch swipe for carousel (mobile friendly)
+    const carouselEl = document.querySelector('.carousel');
+    (function(){
+      if(!carouselEl || !track) return;
+      let startX=0, dx=0, dragging=false, pid=null;
+      const onDown=(e)=>{ dragging=true; startX=e.clientX; dx=0; if(track) track.style.transition='none'; pid=e.pointerId; carouselEl.setPointerCapture?.(pid); if(autoTimer) clearInterval(autoTimer); };
+      const onMove=(e)=>{ if(!dragging || !track) return; dx=e.clientX-startX; const w=track.children[0]?.getBoundingClientRect().width||0; const base=-(w+16)*slide; track.style.transform=`translateX(${base+dx}px)`; };
+      const onUp=()=>{ if(!dragging || !track) return; dragging=false; track.style.transition='transform .45s ease'; const threshold=40; if(Math.abs(dx)>threshold){ go(slide + (dx<0?1:-1)); } else { go(slide); } dx=0; startAuto(); };
+      carouselEl.addEventListener('pointerdown', onDown);
+      carouselEl.addEventListener('pointermove', onMove);
+      carouselEl.addEventListener('pointerup', onUp);
+      carouselEl.addEventListener('pointercancel', onUp);
+    })();
+
+    // Modal (kept for future use)
+    function openReqModal(role, city){
+      const tpl=$('#req-modal'); if(!tpl) return; const node=tpl.content.cloneNode(true);
+      const modal=node.querySelector('.modal'); if(!modal) return;
+
+      const escHandler = (ev)=>{ if(ev.key==='Escape') close(); };
+      const close = ()=>{ modal.remove(); document.body.classList.remove('no-scroll'); document.removeEventListener('keydown', escHandler); };
+
+      document.body.appendChild(node);
+      document.body.classList.add('no-scroll');
+
+      modal.querySelector('[data-close]')?.addEventListener('click', close, {once:true});
+      modal.addEventListener('click', e=>{ if(e.target===modal) close(); });
+      document.addEventListener('keydown', escHandler);
+
+      const roleSel=document.getElementById('r-role'); if(roleSel && role){ roleSel.value=role; }
+      const locSel=document.getElementById('r-location'); if(locSel && city){ locSel.value=city; }
+      document.getElementById('r-company')?.focus();
+
+      document.getElementById('req-form')?.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const data={
+          company:$('#r-company')?.value.trim()||'', name:$('#r-name')?.value.trim()||'', phone:$('#r-phone')?.value.trim()||'', email:$('#r-email')?.value.trim()||'',
+          location:$('#r-location')?.value||'', role:$('#r-role')?.value||'', count:$('#r-count')?.value||'', dates:$('#r-dates')?.value.trim()||'', notes:$('#r-notes')?.value.trim()||''
+        };
+        const body = `Company: ${data.company}%0AContact: ${data.name}%0APhone: ${data.phone}%0AEmail: ${data.email}%0ALocation: ${data.location}%0ARole: ${data.role}%0AHeadcount: ${data.count}%0ADates: ${data.dates}%0ANotes: ${data.notes}`;
+        const mailto = `mailto:info@kohinoorevents.ae?subject=${encodeURIComponent('Staffing Request — '+data.company)}&body=${body}`;
+        window.location.href = mailto;
+        close();
+      }, {once:true});
+    }
+
+    // Buttons -> WhatsApp
+    const openReq = (payload={})=>{ window.open(waLink(payload), '_blank','noopener'); };
+    $('#open-req')?.addEventListener('click', ()=>openReq());
+    $('#open-req-2')?.addEventListener('click', ()=>openReq());
+    $('#hero-req')?.addEventListener('click', ()=>openReq());
+
+    // Back to top
+    $('#to-top')?.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Bootstrap
+    function renderTestimonialsSafe(){ renderTestimonials(); startAuto(); }
+    function init(){
+      const yearEl = document.getElementById('year'); if(yearEl) yearEl.textContent=new Date().getFullYear();
+      onScroll();
+      applyFilters();
+      renderTestimonialsSafe();
+      renderGallery();
+    }
+    document.addEventListener('DOMContentLoaded', init);
+
+    // Lightweight runtime checks (tests)
+    function runTests(){
+      console.log('%cRunning UI tests…','font-weight:600');
+      console.assert(document.getElementById('scrollbar')===null, 'No legacy scrollbar element');
+      console.assert($('#service-grid') && $('#service-grid').children.length>0, 'Services should render');
+      const firstHire = document.querySelector('#service-grid [data-hire]');
+      console.assert(firstHire && firstHire.dataset.hire === SERVICES[0].id, 'Hire button should carry service id');
+      console.assert($('#track') && $('#track').children.length===3, 'Testimonials should render 3 items');
+      const figs = document.querySelectorAll('#masonry figure');
+      console.assert(figs.length>=6, 'Gallery should render at least 6 items');
+      console.assert(Array.from(document.querySelectorAll('#masonry img')).every(im=>im.getAttribute('referrerpolicy')==='no-referrer'), 'Gallery images should set referrerpolicy');
+      console.assert(waLink({role:'Stewarding'}).includes(encodeURIComponent('Role(s): Stewarding')), 'waLink should include role only');
+      console.log('%cAll tests passed.','color:lime');
+    }
+    window.setTimeout(runTests, 1200);
+  </script>
+
+  <!-- SEO: JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Kohinoor Events",
+    "description": "Hospitality staffing provider in the UAE — stewarding, cooks, cleaners, pool attendants, housekeeping, F&B service.",
+    "areaServed": "AE",
+    "url": "",
+    "telephone": "+971552102796",
+    "email": "info@kohinoorevents.ae",
+    "address": {"@type": "PostalAddress", "addressCountry": "AE"},
+    "serviceType": ["Stewarding","Cook","Cleaner","Housekeeping","Pool Attendant","F&B Service","Barista","Lifeguard"]
+  }
+  </script>
+</body>
+</html>
